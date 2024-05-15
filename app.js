@@ -56,8 +56,7 @@ class Counter extends React.Component {
                         type="addition"
                         click={this.handleMathClick}
                     />
-                    <h1>Liczba kliknięć: {this.state.count}</h1>
-                    <h1>Wynik: {this.state.result}</h1>
+                    <ResultPanel count={this.state.count} result={this.state.result} />
                 </>
             )
         }
@@ -68,7 +67,16 @@ const number = parseInt(props.number)
     return (
         <button onClick = {() => props.click(props.type, number)}>{props.name}</button>
     )
-    }
+}
+
+const ResultPanel = (props) => {
+    return (
+        <>
+            <h1>Liczba kliknięć: {props.count}{props.count > 10 ? <span>. Przeciążenie procesora!</span> : null}</h1>
+            <h1>Wynik: {props.result}</h1>
+        </>
+    )
+}
 
 const startValue = 0
 ReactDOM.render(<Counter result={startValue} />, document.getElementById("root"))
